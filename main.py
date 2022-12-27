@@ -9,21 +9,21 @@ pygame.init()
 
 screen = pygame.display.set_mode((800, 600))
 
-character_image = pygame.image.load("C:/Users/GGius/PycharmProjects/ProgettoVideogamePython/imgs/character.png")
+character_image = pygame.image.load("C:/Users/GGius/PycharmProjects/VideogamePygame/imgs/character.png")
 character_rect = pygame.Rect(0,  200, 64, 64)
 
 
 
 # Carica l'immagine del background
-nero_surface = pygame.image.load("C:/Users/GGius/PycharmProjects/ProgettoVideogamePython/imgs/nero.png")
+nero_surface = pygame.image.load("C:/Users/GGius/PycharmProjects/VideogamePygame/imgs/nero.png")
 nero_surface_scaled = nero_surface.copy()
 nero_surface_scaled = pygame.transform.scale(nero_surface_scaled, (800, 600))
 
-background_surface = pygame.image.load("C:/Users/GGius/PycharmProjects/ProgettoVideogamePython/imgs/background.png")
+background_surface = pygame.image.load("C:/Users/GGius/PycharmProjects/VideogamePygame/imgs/background.png")
 background_surface_scaled = background_surface.copy()
 background_surface_scaled = pygame.transform.scale(background_surface_scaled, (800, 600))
 
-floor_surface = pygame.image.load("C:/Users/GGius/PycharmProjects/ProgettoVideogamePython/imgs/pavimento1.png")
+floor_surface = pygame.image.load("C:/Users/GGius/PycharmProjects/VideogamePygame/imgs/pavimento1.png")
 floor_rect = pygame.Rect(0,  400, 24,48)
 
 
@@ -44,15 +44,15 @@ max_jump_height = 200
 
 
 character_images = [
-    pygame.image.load("C:/Users/GGius/PycharmProjects/ProgettoVideogamePython/imgs/character.png"),
-    pygame.image.load("C:/Users/GGius/PycharmProjects/ProgettoVideogamePython/imgs/walks/Walk1.png"),
-    pygame.image.load("C:/Users/GGius/PycharmProjects/ProgettoVideogamePython/imgs/walks/Walk2.png"),
-    pygame.image.load("C:/Users/GGius/PycharmProjects/ProgettoVideogamePython/imgs/walks/Walk3.png"),
-    pygame.image.load("C:/Users/GGius/PycharmProjects/ProgettoVideogamePython/imgs/walks/Walk4.png"),
-    pygame.image.load("C:/Users/GGius/PycharmProjects/ProgettoVideogamePython/imgs/walks/Walk5.png"),
-    pygame.image.load("C:/Users/GGius/PycharmProjects/ProgettoVideogamePython/imgs/walks/Walk6.png"),
-    pygame.image.load("C:/Users/GGius/PycharmProjects/ProgettoVideogamePython/imgs/walks/Walk7.png"),
-    pygame.image.load("C:/Users/GGius/PycharmProjects/ProgettoVideogamePython/imgs/walks/Walk8.png")
+    pygame.image.load("C:/Users/GGius/PycharmProjects/VideogamePygame/imgs/character.png"),
+    pygame.image.load("C:/Users/GGius/PycharmProjects/VideogamePygame/imgs/walks/Walk1.png"),
+    pygame.image.load("C:/Users/GGius/PycharmProjects/VideogamePygame/imgs/walks/Walk2.png"),
+    pygame.image.load("C:/Users/GGius/PycharmProjects/VideogamePygame/imgs/walks/Walk3.png"),
+    pygame.image.load("C:/Users/GGius/PycharmProjects/VideogamePygame/imgs/walks/Walk4.png"),
+    pygame.image.load("C:/Users/GGius/PycharmProjects/VideogamePygame/imgs/walks/Walk5.png"),
+    pygame.image.load("C:/Users/GGius/PycharmProjects/VideogamePygame/imgs/walks/Walk6.png"),
+    pygame.image.load("C:/Users/GGius/PycharmProjects/VideogamePygame/imgs/walks/Walk7.png"),
+    pygame.image.load("C:/Users/GGius/PycharmProjects/VideogamePygame/imgs/walks/Walk8.png")
 
 ]
 
@@ -118,9 +118,6 @@ while True:
 
     if event.type == pygame.KEYUP and event.key == pygame.K_d:
         character_image_index = 0
-
-
-
 
 
     screen.blit(nero_surface_scaled, (0, 0))
