@@ -43,6 +43,7 @@ jumping = False
 max_jump_height = 200
 
 
+
 character_images = [
     pygame.image.load("C:/Users/GGius/PycharmProjects/VideogamePygame/imgs/character.png"),
     pygame.image.load("C:/Users/GGius/PycharmProjects/VideogamePygame/imgs/walks/Walk1.png"),
@@ -55,6 +56,10 @@ character_images = [
     pygame.image.load("C:/Users/GGius/PycharmProjects/VideogamePygame/imgs/walks/Walk8.png")
 
 ]
+
+jump_frames = [pygame.image.load("jump1.png"),
+               pygame.image.load("jump2.png"),
+               pygame.image.load("jump3.png")]
 
 while True:
 
