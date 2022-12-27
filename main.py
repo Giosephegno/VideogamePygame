@@ -39,8 +39,11 @@ fall_speed = 5
 # Determina se il personaggio sta saltando
 jumping = False
 
+# Inizializza il contatore delle fasi del salto
+jump_frame_index = 0
+character_jump_change_speed = 8
 # Determina la massima altezza del salto
-max_jump_height = 200
+max_jump_height = 250
 
 
 
@@ -57,9 +60,13 @@ character_images = [
 
 ]
 
-jump_frames = [pygame.image.load("jump1.png"),
-               pygame.image.load("jump2.png"),
-               pygame.image.load("jump3.png")]
+jump_frames = [pygame.image.load("C:/Users/GGius/PycharmProjects/VideogamePygame/imgs/jump/Jump1.png"),
+               pygame.image.load("C:/Users/GGius/PycharmProjects/VideogamePygame/imgs/jump/Jump2.png"),
+               pygame.image.load("C:/Users/GGius/PycharmProjects/VideogamePygame/imgs/jump/Jump3.png"),
+               pygame.image.load("C:/Users/GGius/PycharmProjects/VideogamePygame/imgs/jump/Jump4.png"),
+               pygame.image.load("C:/Users/GGius/PycharmProjects/VideogamePygame/imgs/jump/Jump5.png"),
+               pygame.image.load("C:/Users/GGius/PycharmProjects/VideogamePygame/imgs/jump/Jump6.png")
+               ]
 
 while True:
 
@@ -70,38 +77,49 @@ while True:
             pygame.quit()
             sys.exit()
 
-        # Se il giocatore preme la barra spaziatrice...
+
         if event.type == pygame.KEYDOWN and event.key == pygame.K_SPACE:
+
             # Se il personaggio non sta già saltando, inizia il salto
             if not jumping:
                 jumping = True
                 # Imposta la velocità di salto
-                jump_velocity = 1
+                jump_velocity = -2
+                # Imposta il contatore delle fasi del salto su 0
+                jump_frame_index = 0
 
-            if jumping and character_rect.y == max_jump_height:
-                jumping = False
 
+            elif event.type == pygame.KEYUP and event.key == pygame.K_SPACE:
 
-        # Se il giocatore rilascia la barra spaziatrice...
-        elif event.type == pygame.KEYUP and event.key == pygame.K_SPACE:
-            # Se il personaggio è ancora in aria, interrompi il salto
-            if jumping:
-                jumping = False
-
+                # Se il personaggio è ancora in aria, interrompi il salto
+                if jumping:
+                    jumping = False
 
     if jumping:
         # Aggiorna la posizione del personaggio in base alla velocità di salto
-        character_rect.y -= jump_velocity
-
-        # Incrementa la velocità di caduta
-        jump_velocity += 1
+        character_rect.y += jump_velocity
 
         # Se il personaggio ha raggiunto l'altezza massima del salto, interrompi il salto
-        if character_rect.y < max_jump_height:
+        if character_rect.y <= max_jump_height:
             jumping = False
-        elif character_rect.colliderect(floor_rect):
-            jumping = False
-            character_rect.bottom = floor_rect.top
+            jump_velocity = 2
+    else:
+        # Se il personaggio è a terra, reimposta la posizione iniziale
+        character_rect.y = 340
+
+    if jumping:
+
+        current_frame += 1
+
+        if current_frame >= character_jump_change_speed:
+
+            current_frame = 0
+            jump_frame_index += 1
+
+        if jump_frame_index >= len(jump_frames):
+            jump_frame_index = 0
+
+
 
     keys = pygame.key.get_pressed()
 
@@ -140,9 +158,10 @@ while True:
 
     # Disegno del personaggio e del terreno sullo schermo
 
-
-    screen.blit(character_images[character_image_index], character_rect)
-
+    if not jumping:
+        screen.blit(character_images[character_image_index], character_rect)
+    else:
+        screen.blit(jump_frames[jump_frame_index], character_rect)
     pygame.display.flip()
 
 
