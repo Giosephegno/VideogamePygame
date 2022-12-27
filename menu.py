@@ -25,10 +25,10 @@ while running:
         if event.type == pygame.QUIT:
             running = False
         elif event.type == pygame.KEYDOWN:
-            if event.key == pygame.K_UP:
+            if event.key == pygame.K_w:
                 # Seleziona l'opzione precedente del menu
                 selected_option = (selected_option - 1) % len(menu_options)
-            elif event.key == pygame.K_DOWN:
+            elif event.key == pygame.K_s:
                 # Seleziona l'opzione successiva del menu
                 selected_option = (selected_option + 1) % len(menu_options)
             elif event.key == pygame.K_RETURN:
