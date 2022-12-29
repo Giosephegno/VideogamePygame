@@ -93,12 +93,12 @@ jump_frames = [ pygame.transform.scale(pygame.image.load("C:/Users/GGius/Pycharm
                 pygame.transform.scale(pygame.image.load("C:/Users/GGius/PycharmProjects/VideogamePygame/imgs/jump/Jump4.png"),(128, 128))
                ]
 
-fall_images = [ pygame.transform.scale(pygame.image.load("C:/Users/GGius/PycharmProjects/VideogamePygame/imgs/fall/Jump5.png"),(128, 128)),
-                pygame.transform.scale(pygame.image.load("C:/Users/GGius/PycharmProjects/VideogamePygame/imgs/fall/Jump6.png"),(128, 128)),
-                pygame.transform.scale(pygame.image.load("C:/Users/GGius/PycharmProjects/VideogamePygame/imgs/fall/Jump7.png"),(128, 128)),
-                pygame.transform.scale(pygame.image.load("C:/Users/GGius/PycharmProjects/VideogamePygame/imgs/fall/Jump8.png"),(128, 128)),
-                pygame.transform.scale(pygame.image.load("C:/Users/GGius/PycharmProjects/VideogamePygame/imgs/fall/Jump9.png"),(128, 128)),
-                pygame.transform.scale(pygame.image.load("C:/Users/GGius/PycharmProjects/VideogamePygame/imgs/fall/Jump10.png"),(128, 128))]
+fall_images = [pygame.transform.scale(pygame.image.load("/imgs/jump/Jump5.png"), (128, 128)),
+               pygame.transform.scale(pygame.image.load("/imgs/jump/Jump6.png"), (128, 128)),
+               pygame.transform.scale(pygame.image.load("/imgs/jump/Jump7.png"), (128, 128)),
+               pygame.transform.scale(pygame.image.load("/imgs/jump/Jump8.png"), (128, 128)),
+               pygame.transform.scale(pygame.image.load("/imgs/jump/Jump9.png"), (128, 128)),
+               pygame.transform.scale(pygame.image.load("/imgs/jump/Jump10.png"), (128, 128))]
 
 
 while True:

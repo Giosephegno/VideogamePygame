@@ -31,6 +31,17 @@ walkLeft = [pygame.transform.scale(pygame.image.load('imgs/Swalks/character.png'
             pygame.transform.scale(pygame.image.load('imgs/Swalks/Walk7.png'), (128, 128)), pygame.transform.scale(pygame.image.load('imgs/Swalks/Walk8.png'), (128, 128)),
             pygame.transform.scale(pygame.image.load('imgs/Swalks/Walk9.png'), (128, 128)), pygame.transform.scale(pygame.image.load('imgs/Swalks/Walk10.png'), (128, 128)),]
 
+jump_frames = [ pygame.transform.scale(pygame.image.load("C:/Users/GGius/PycharmProjects/VideogamePygame/imgs/jump/Jump1.png"),(128, 128)),
+                pygame.transform.scale(pygame.image.load("C:/Users/GGius/PycharmProjects/VideogamePygame/imgs/jump/Jump2.png"),(128, 128)),
+                pygame.transform.scale(pygame.image.load("C:/Users/GGius/PycharmProjects/VideogamePygame/imgs/jump/Jump3.png"),(128, 128)),
+                pygame.transform.scale(pygame.image.load("C:/Users/GGius/PycharmProjects/VideogamePygame/imgs/jump/Jump4.png"),(128, 128)),
+                pygame.transform.scale(pygame.image.load("C:/Users/GGius/PycharmProjects/VideogamePygame/imgs/jump/Jump5.png"),(128, 128)),
+                pygame.transform.scale(pygame.image.load("C:/Users/GGius/PycharmProjects/VideogamePygame/imgs/jump/Jump6.png"),(128, 128)),
+                pygame.transform.scale(pygame.image.load("C:/Users/GGius/PycharmProjects/VideogamePygame/imgs/jump/Jump7.png"),(128, 128)),
+                pygame.transform.scale(pygame.image.load("C:/Users/GGius/PycharmProjects/VideogamePygame/imgs/jump/Jump8.png"),(128, 128)),
+                pygame.transform.scale(pygame.image.load("C:/Users/GGius/PycharmProjects/VideogamePygame/imgs/jump/Jump9.png"),(128, 128)),
+                pygame.transform.scale(pygame.image.load("C:/Users/GGius/PycharmProjects/VideogamePygame/imgs/jump/Jump10.png"),(128, 128))
+               ]
 
 clock = pygame.time.Clock()
 
@@ -45,6 +56,7 @@ class player(object):
         self.isJump = False
         self.left = False
         self.right = False
+        self.jumpc = 0
         self.walkCount = 0
         self.jumpCount = 10
         self.standing = True
@@ -52,6 +64,8 @@ class player(object):
     def draw(self, win):
         if self.walkCount + 1 >= 27:
             self.walkCount = 0
+        if self.jumpc + 1 >= 27:
+            self.jumpc = 0
 
         if not (self.standing):
             if self.left:
@@ -61,6 +75,10 @@ class player(object):
             elif self.right:
                 win.blit(walkRight[self.walkCount // 3], (self.x, self.y))
                 self.walkCount += 1
+
+        elif self.isJump:
+            win.blit(jump_frames[self.jumpc //4], (self.x, self.y))
+            self.jumpc += 1
 
         else:
 
@@ -108,14 +126,14 @@ while run:
             run = False
 
     for bullet in bullets:
-        if bullet.x < 500 and bullet.x > 0:
+        if bullet.x < larghezza and bullet.x > 0:
             bullet.x += bullet.vel
         else:
             bullets.pop(bullets.index(bullet))
 
     keys = pygame.key.get_pressed()
 
-    if keys[pygame.K_SPACE]:
+    if keys[pygame.K_r]:
         if man.left:
             facing = -1
         else:
@@ -125,13 +143,13 @@ while run:
             bullets.append(
                 projectile(round(man.x + man.width // 2), round(man.y + man.height // 2), 6, (255, 255, 255), facing))
 
-    if keys[pygame.K_LEFT] and man.x > man.vel:
+    if keys[pygame.K_a] and man.x > man.vel:
         man.x -= man.vel
         man.left = True
         man.right = False
         man.standing = False
 
-    elif keys[pygame.K_RIGHT] and man.x < 500 - man.width - man.vel:
+    elif keys[pygame.K_d] and man.x < larghezza - man.width - man.vel:
         man.x += man.vel
         man.right = True
         man.left = False
@@ -141,7 +159,7 @@ while run:
         man.walkCount = 0
 
     if not (man.isJump):
-        if keys[pygame.K_UP]:
+        if keys[pygame.K_w]:
             man.isJump = True
             man.right = False
             man.left = False
