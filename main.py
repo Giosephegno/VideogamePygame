@@ -47,7 +47,8 @@ fall_frame_count = 0
 fall_speed = 5
 
 # Determina se il personaggio sta saltando
-jumping = False
+isJump = False
+jumpCount = 10
 
 # Inizializza il contatore delle fasi del salto
 jump_frame_index = 0
@@ -125,7 +126,8 @@ while True:
 
 
     keys = pygame.key.get_pressed()
-    if character_rect.bottom >= floor_rect.top:
+
+    if not(isJump):
 
         ## Va a sinistra quando premo A
         if keys[pygame.K_a]:
@@ -155,8 +157,8 @@ while True:
             screen.blit(character_images[character_image_index], character_rect)
 
         ## Salta quando premo W
-        if keys[pygame.K_w]:
-            character_rect.y -= jump_speed
+        if keys[pygame.K_UP]:
+            pass
 
 
 
