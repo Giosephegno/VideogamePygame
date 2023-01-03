@@ -1,11 +1,12 @@
 import pygame
 from Player import player
 from Projectile import projectile
+from Floor import Floor
 
 pygame.init()
+
 larghezza = 800
 altezza = 600
-
 
 win = pygame.display.set_mode((larghezza, altezza))
 
@@ -17,6 +18,8 @@ nero_surface = pygame.transform.scale(nero_surface, (larghezza, altezza))
 bg = pygame.image.load("imgs/background.png")
 bg = pygame.transform.scale(bg, (800, 600))
 
+barra_stamina = pygame.transform.scale(pygame.image.load("imgs/UI_ETCBAR.png"),(124, 29))
+
 char =  pygame.transform.scale(pygame.image.load('imgs/character.png'), (128, 128))
 
 
@@ -24,11 +27,13 @@ char =  pygame.transform.scale(pygame.image.load('imgs/character.png'), (128, 12
 clock = pygame.time.Clock()
 
 def redrawGameWindow():
-
     win.blit(nero_surface, (0, 0))
     win.blit(bg, (0, 0))
+    win.blit(barra_stamina, (600, 50))
 
+    flor.draw(win)
     man.draw(win)
+
     for bullet in bullets:
         bullet.draw(win)
 
@@ -36,9 +41,11 @@ def redrawGameWindow():
 
 
 # mainloop
-man = player(200, 410, 64, 64)
+man = player(10, 420, 64, 64)
+flor = Floor(495,24,24, larghezza)
 bullets = []
 run = True
+
 while run:
     clock.tick(27)
 
@@ -64,24 +71,38 @@ while run:
             bullets.append(
                 projectile(round(man.x+3 + man.width-3 // 2), round(man.y + man.height-11 // 2), 6, (255, 255, 255), facing))
 
+
+    elif keys[pygame.K_a] and man.x > man.vel and keys[pygame.K_SPACE] and man.stamina > 0:
+        man.vel = 10
+        man.stamina -= 30
+        man.x -= man.vel
+        man.corsa = True
+        man.right = False
+        man.left = True
+        man.standing = False
+        if man.corsa:
+            man.corsa = False
+            man.vel = 5
+
     if keys[pygame.K_a] and man.x > man.vel:
-        if man.stamina > 100 and man.stamina < 500 :
-            man.stamina += 70
-        if man.stamina < 100:
-            man.stamina += 10
+        if man.stamina < 500 :
+            man.stamina += 3
+
 
         man.x -= man.vel
         man.left = True
         man.right = False
         man.standing = False
 
+
+
     elif keys[pygame.K_d] and man.x < larghezza - man.width - man.vel and keys[pygame.K_SPACE] and man.stamina > 0:
-        man.vel = 10
-        print(man.stamina)
+        man.vel = 15
         man.stamina -= 30
         man.x += man.vel
         man.corsa = True
         man.left = False
+        man.right = True
         man.standing = False
         if man.corsa:
             man.corsa = False
@@ -89,21 +110,19 @@ while run:
 
 
     elif keys[pygame.K_d] and man.x < larghezza - man.width - man.vel:
-        if man.stamina > 100 and man.stamina < 500:
-            man.stamina += 70
-        if man.stamina < 100:
-            man.stamina += 10
+        if man.stamina < 500:
+            man.stamina += 3
 
         man.x += man.vel
         man.right = True
         man.left = False
         man.standing = False
 
-
-
     else:
         man.standing = True
         man.walkCount = 0
+        if man.stamina < 500 :
+            man.stamina += 3
 
     if not (man.isJump):
         if keys[pygame.K_w]:
